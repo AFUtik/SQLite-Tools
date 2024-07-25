@@ -38,11 +38,8 @@ public class EntityRowMapper {
 
     public static List<Object> entityToRow(Object entity) {
         List<Object> values = new ArrayList<>();
-        Class<?> tClass = entity.getClass();
-
-        for(Field field : tClass.getDeclaredFields()) {
+        for(Field field : entity.getClass().getDeclaredFields()) {
             field.setAccessible(true);
-
             try {
                 Object value = field.get(entity);
                 values.add(value);

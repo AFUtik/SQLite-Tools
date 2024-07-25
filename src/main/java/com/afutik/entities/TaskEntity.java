@@ -1,9 +1,14 @@
 package com.afutik.entities;
 
-import lombok.AllArgsConstructor;
+import com.afutik.annotations.Key;
+import lombok.*;
 
 @AllArgsConstructor
-public class TaskEntity {
-    private int id;
+@NoArgsConstructor
+@Getter
+@Setter
+public class TaskEntity extends Entity {
+    @Key
+    private Integer id;
     private String title;
 }
