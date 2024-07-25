@@ -1,14 +1,12 @@
 package com.afutik.entities;
 
 import com.afutik.annotations.Key;
-import com.afutik.annotations.Table;
 import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-public class UserEntity extends Entity {
+@Data
+public class UserEntity implements Entity {
     @Key
     private Integer id;
     private String name;

@@ -1,20 +1,20 @@
 package com.afutik.repositories;
 
 import com.afutik.SqliteDatabase;
+import com.afutik.annotations.EntityRepository;
 import com.afutik.entities.Entity;
 import com.afutik.entities.EntityRowMapper;
-import lombok.RequiredArgsConstructor;
 
 import java.sql.SQLException;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@RequiredArgsConstructor
 public class Repository<T extends Entity> {
-    private final Class<T> repoEntity;
-    private final String table;
+    private final EntityRepository annotation = this.getClass().getAnnotation(EntityRepository.class);
+
+    private final Class<? extends T> repoEntity = (Class<? extends T>) annotation.entityClass();
+    private final String table = annotation.table();
 
     public void create(T entity) throws SQLException {
         String query = "INSERT INTO " + this.table + " VALUES(" +
@@ -52,10 +52,20 @@ public class Repository<T extends Entity> {
         }
     }
 
+    public T getBy(String field, Object value) {
+        try {
+            String query = "SELECT * FROM " + this.table +
+                           " WHERE " + field + " = ?";
+            return EntityRowMapper.rowToEntity(SqliteDatabase.prepareStatement(query, new Object[] {value}), repoEntity);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void delete(Object... args) {
         try {
             String query = "DELETE FROM " + this.table +
-                           "WHERE " + Entity.getKeysName(repoEntity)
+                           " WHERE " + Entity.getKeysName(repoEntity)
                                                 .stream()
                                                 .map(key -> key + " = ?")
                                                 .collect(Collectors.joining(" and "));
@@ -63,6 +73,5 @@ public class Repository<T extends Entity> {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 }

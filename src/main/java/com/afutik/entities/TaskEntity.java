@@ -5,9 +5,8 @@ import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-public class TaskEntity extends Entity {
+@Data
+public class TaskEntity implements Entity {
     @Key
     private Integer id;
     private String title;

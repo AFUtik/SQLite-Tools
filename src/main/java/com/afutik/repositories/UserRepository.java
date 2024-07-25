@@ -1,9 +1,7 @@
 package com.afutik.repositories;
 
+import com.afutik.annotations.EntityRepository;
 import com.afutik.entities.UserEntity;
 
-public class UserRepository extends Repository<UserEntity> {
-    public UserRepository() {
-        super(UserEntity.class, "users");
-    }
-}
+@EntityRepository(entityClass = UserEntity.class, table = "users")
+public class UserRepository extends Repository<UserEntity> {}

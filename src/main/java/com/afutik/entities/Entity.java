@@ -6,8 +6,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Entity {
-    public static List<String> getKeysName(Class<? extends Entity> classEntity) {
+public interface Entity {
+    static List<String> getKeysName(Class<? extends Entity> classEntity) {
         List<String> keys = new ArrayList<>();
         for(Field field : classEntity.getDeclaredFields()) {
             field.setAccessible(true);
@@ -16,7 +16,7 @@ public class Entity {
         return keys;
     }
 
-    public static List<String> getValuesName(Class<? extends Entity> classEntity) {
+    static List<String> getValuesName(Class<? extends Entity> classEntity) {
         List<String> values = new ArrayList<>();
         for (Field field : classEntity.getDeclaredFields()) {
             field.setAccessible(true);
@@ -25,15 +25,15 @@ public class Entity {
         return values;
     }
 
-    public List<String> getKeysName() {
+    default List<String> getKeysName() {
         return Entity.getKeysName(this.getClass());
     }
 
-    public List<String> getValuesName() {
+    default List<String> getValuesName() {
         return Entity.getValuesName(this.getClass());
     }
 
-    public Object[] getKeys() {
+    default Object[] getKeys() {
         List<Object> keys = new ArrayList<>();
         for(Field field : this.getClass().getDeclaredFields()) {
             field.setAccessible(true);
@@ -48,7 +48,7 @@ public class Entity {
         return keys.toArray();
     }
 
-    public Object[] getValues() {
+    default Object[] getValues() {
         List<Object> values = new ArrayList<>();
         for(Field field : this.getClass().getDeclaredFields()) {
             field.setAccessible(true);
