@@ -1,6 +1,7 @@
-package com.afutik.entities;
+package com.afutik.entity;
 
-import com.afutik.annotations.Key;
+import com.afutik.annotation.Key;
+import com.afutik.annotation.Value;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -11,7 +12,14 @@ public interface Entity {
         List<String> keys = new ArrayList<>();
         for(Field field : classEntity.getDeclaredFields()) {
             field.setAccessible(true);
-            if(field.isAnnotationPresent(Key.class)) keys.add(field.getName());
+            if(field.isAnnotationPresent(Key.class)) {
+                String name = field.getAnnotation(Key.class).name();
+                if(!name.isEmpty()) {
+                    keys.add(name);
+                } else {
+                    keys.add(field.getName());
+                }
+            };
         }
         return keys;
     }
@@ -20,17 +28,13 @@ public interface Entity {
         List<String> values = new ArrayList<>();
         for (Field field : classEntity.getDeclaredFields()) {
             field.setAccessible(true);
-            if (!field.isAnnotationPresent(Key.class)) values.add(field.getName());
+            if(field.isAnnotationPresent(Value.class)) {
+                values.add(field.getAnnotation(Value.class).name());
+            } else if (!field.isAnnotationPresent(Key.class)) {
+                values.add(field.getName());
+            };
         }
         return values;
-    }
-
-    default List<String> getKeysName() {
-        return Entity.getKeysName(this.getClass());
-    }
-
-    default List<String> getValuesName() {
-        return Entity.getValuesName(this.getClass());
     }
 
     default Object[] getKeys() {
@@ -61,5 +65,20 @@ public interface Entity {
             }
         }
         return values.toArray();
+    }
+
+    default Object[] toRow() {
+        Field[] fields = this.getClass().getDeclaredFields();
+        Object[] values = new Object[fields.length];
+        for(int i = 0; i < fields.length; i++) {
+            try {
+                Field field = fields[i];
+                field.setAccessible(true);
+                values[i] = field.get(this);
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return values;
     }
 }
