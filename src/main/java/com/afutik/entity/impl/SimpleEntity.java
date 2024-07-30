@@ -3,8 +3,6 @@ package com.afutik.entity.impl;
 import com.afutik.annotation.Key;
 import com.afutik.annotation.Value;
 import com.afutik.entity.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 import java.sql.Timestamp;
 
@@ -14,12 +12,23 @@ import java.sql.Timestamp;
     Using of Key is required.
     Using of @Value is optional.
 */
-@AllArgsConstructor
-@Getter
 public class SimpleEntity implements Entity {
     @Key(name = "name")
-    private String name;
+    private final String name;
 
     @Value(name = "created_time")
-    private Timestamp time;
+    private final Timestamp time;
+
+    public SimpleEntity(String name, Timestamp time) {
+        this.name = name;
+        this.time = time;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Timestamp getTime() {
+        return time;
+    }
 }

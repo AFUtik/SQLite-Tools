@@ -1,12 +1,12 @@
 package com.afutik.config;
-
-import lombok.RequiredArgsConstructor;
-
 import java.util.Map;
 
-@RequiredArgsConstructor
 public class YamlConfig {
     public final Map<String, Object> config;
+
+    public YamlConfig(Map<String, Object> config) {
+        this.config = config;
+    }
 
     public String getString(String name) {
         return get(name, String.class);
@@ -17,7 +17,7 @@ public class YamlConfig {
     }
 
     @SuppressWarnings("unchecked")
-    public <T> T get(String name, Class<T> tClass) {
+    private <T> T get(String name, Class<T> tClass) {
         String[] keys = name.split("\\.");
         Map<String, Object> currentMap = config;
         Object value = null;

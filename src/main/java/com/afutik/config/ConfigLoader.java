@@ -1,6 +1,4 @@
 package com.afutik.config;
-
-import lombok.SneakyThrows;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
@@ -14,18 +12,19 @@ public class ConfigLoader {
                 throw new IllegalArgumentException("file not found: " + fileName);
             }
             return new YamlConfig(yaml.load(inputStream));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (IOException ex) {
+            return null;
         }
     }
 
-    @SneakyThrows
     public static String loadResourceAsString(String resourcePath) {
         try (InputStream inputStream = ConfigLoader.class.getClassLoader().getResourceAsStream(resourcePath)) {
             if (inputStream == null) {
                 throw new IOException("Resource not found: " + resourcePath);
             }
             return new String(inputStream.readAllBytes());
+        } catch (IOException ex) {
+            return null;
         }
     }
 }
