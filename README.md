@@ -35,7 +35,7 @@ public class SimpleEntity implements Entity {
 ```
 
 ## Repository
-The project has the annotatiom '@Repo' for creating repositories.
+The project has the annotation '@Repo' for creating repositories.
 ```java
 @Repo(entityClass = SimpleEntity.class, table = "some table")
 public class SimpleRepository extends Repository<SimpleEntity> {}
