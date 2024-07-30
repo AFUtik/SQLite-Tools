@@ -1,6 +1,6 @@
 package com.afutik.repository;
 
-import com.afutik.SqliteDatabase;
+import com.afutik.SQLiteDatabase;
 import com.afutik.annotation.Repo;
 import com.afutik.entity.Entity;
 import com.afutik.entity.utils.EntityMapper;
@@ -43,17 +43,17 @@ public class Repository<T extends Entity> {
                     .collect(Collectors.joining(" and "));
 
     public void create(T entity) {
-        SqliteDatabase.prepareStatement(CREATE, entity.toRow());
+        SQLiteDatabase.prepareStatement(CREATE, entity.toRow());
     }
 
     public void update(T entity) {
-        SqliteDatabase.prepareStatement(UPDATE, Stream.concat(Arrays.stream(entity.getValues()), Arrays.stream(entity.getKeys()))
+        SQLiteDatabase.prepareStatement(UPDATE, Stream.concat(Arrays.stream(entity.getValues()), Arrays.stream(entity.getKeys()))
                                                      .toArray(Object[]::new));
     }
 
     public T getById(Object... args) {
         try {
-            return EntityMapper.rsToEntity(SqliteDatabase.prepareStatement(GET, args), repoEntity);
+            return EntityMapper.rsToEntity(SQLiteDatabase.prepareStatement(GET, args), repoEntity);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -61,7 +61,7 @@ public class Repository<T extends Entity> {
 
     public List<T> getManyById(Object... args) {
         try {
-            return (List<T>) EntityMapper.rsToEntities(SqliteDatabase.prepareStatement(GET, args), repoEntity);
+            return (List<T>) EntityMapper.rsToEntities(SQLiteDatabase.prepareStatement(GET, args), repoEntity);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -69,7 +69,7 @@ public class Repository<T extends Entity> {
 
     public void delete(Object... args) {
         try {
-            SqliteDatabase.prepareStatement(DELETE, args);
+            SQLiteDatabase.prepareStatement(DELETE, args);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
