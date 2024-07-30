@@ -1,4 +1,10 @@
-# Maven Dependency
+# Maven Dependency and Repository
+```xml
+<repository>
+    <id>github</id>
+    <url>https://maven.pkg.github.com/afutik/SQLite-Tools</url>
+ </repository>
+```
 ```xml
 <dependency>
     <groupId>com.afutik</groupId>
