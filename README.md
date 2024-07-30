@@ -1,3 +1,12 @@
+# Maven Dependency
+```maven
+<dependency>
+    <groupId>com.afutik</groupId>
+    <artifactId>sqlite-tools</artifactId>
+    <version>1.1.2</version>
+</dependency>
+```
+
 # Guide
 This Repository provides the tools that simplify work with Database and other objects. 
 ## Config
