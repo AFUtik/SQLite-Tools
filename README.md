@@ -1,5 +1,5 @@
 # Maven Dependency
-```maven
+```xml
 <dependency>
     <groupId>com.afutik</groupId>
     <artifactId>sqlite-tools</artifactId>
