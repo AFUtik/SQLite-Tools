@@ -27,6 +27,8 @@ Use @Key(name = name in schema) or @Value(name = name in schema) If you need ano
 Using of Key is required.
 Using of @Value is optional.
 ```java
+@AllArgsConstructor /* Useful annotations from lombok */
+@Getter
 public class SimpleEntity implements Entity {
   @Key private String name;
 }
