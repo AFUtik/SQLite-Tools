@@ -3,7 +3,7 @@
 <repository>
     <id>github</id>
     <url>https://maven.pkg.github.com/afutik/SQLite-Tools</url>
- </repository>
+</repository>
 ```
 ```xml
 <dependency>
