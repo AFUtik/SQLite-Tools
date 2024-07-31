@@ -24,8 +24,8 @@ schema-path: src/main/resources/database/schema.sql
 After you need to create schema.sql in your schema-path.
 
 ## Connecting
-In order to connect to database you need to write the code shown below. Database file will be created automatically.
-If you need to change config path or config name write 'SQLdatabase.setConfigPath()', by default path is 'src/main/resources/sqlite.yml'.
+In order to connect to database, use the following code. The Database file will be created automatically.
+If you need to change config path or name, use 'SQLdatabase.setConfigPath()', by default path is 'src/main/resources/sqlite.yml'.
 ```java
 public class Main {
   public static void main(String[] args) {
@@ -66,12 +66,12 @@ delete()
 
 
 ## Queries
-To execute update or execute a query ->
+To execute an update or a query, use: ->
 ```
 SQLiteDatabase.statement.executeQuery(String query)
 ```
 
-To prepare statement ->
+To prepare a statement with parameters, use ->
 ```
 SQLiteDatabase.prepareStatement(String query, Object... args)
 ```
