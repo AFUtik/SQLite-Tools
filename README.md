@@ -16,7 +16,7 @@
 # Guide
 This Repository provides the tools that simplify work with Database and other objects. 
 ## Config
-Before creating database you need to create config "sqlite.yml" in resources directory. 
+Before creating database you need to create config "sqlite.yml" in resources directory. You can use the class 'ConfigLoader' to load another config.
 ```yml
 database-path: src/main/resources/database/database.db
 schema-path: src/main/resources/database/schema.sql
