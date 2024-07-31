@@ -37,10 +37,7 @@ public class Main {
 ```
 
 ## Entity
-You need place the variables in the same order as the schema.
-Use @Key(name = name in schema) or @Value(name = name in schema) If you need another name for a variable.
-Using of Key is required.
-Using of @Value is optional.
+Define your entity classes with variables in the same order as the schema. Use the @Key(name = "schema_name") annotation to map the variable to a schema column. The @Value(name = "schema_name") annotation is optional but useful if you need a different name for a variable. The use of @Key is mandatory.
 ```java
 @AllArgsConstructor /* Useful annotations from lombok */
 @Getter
