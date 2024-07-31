@@ -15,15 +15,15 @@
 
 # Guide
 This Repository provides the tools that simplify work with Database and other objects. 
-## Config
-Before creating database you need to create config "sqlite.yml" in resources directory. You can use the class 'ConfigLoader' to load another config.
+## Creating Config
+Before creating database you need to create a configuration file "sqlite.yml" in resources directory. You can use the class 'ConfigLoader' to load a different configuration file if needed.
 ```yml
 database-path: src/main/resources/database/database.db
 schema-path: src/main/resources/database/schema.sql
 ```
-After you need to create schema.sql in your schema-path.
+You also need to create schema.sql at the specified schema-path.
 
-## Connecting
+## Connecting to the Database
 In order to connect to database, use the following code. The Database file will be created automatically.
 If you need to change config path or name, use 'SQLdatabase.setConfigPath()', by default path is 'src/main/resources/sqlite.yml'.
 ```java
@@ -36,7 +36,7 @@ public class Main {
 }
 ```
 
-## Entity
+## Creating Entity
 Define your entity classes with variables in the same order as the schema. Use the @Key(name = "schema_name") annotation to map the variable to a schema column. The @Value(name = "schema_name") annotation is optional but useful if you need a different name for a variable. The use of @Key is mandatory.
 ```java
 @AllArgsConstructor /* Useful annotations from lombok */
@@ -46,13 +46,13 @@ public class SimpleEntity implements Entity {
 }
 ```
 
-## Repository
+## Creating Repository
 The project has the annotation '@Repo' for creating repositories.
 ```java
 @Repo(entityClass = SimpleEntity.class, table = "some table")
 public class SimpleRepository extends Repository<SimpleEntity> {}
 ```
-The repository has such methods for executing a query ->
+The repository includes methods for executing a queries ->
 ```
 create()
 update()
@@ -62,7 +62,7 @@ delete()
 ```
 
 
-## Queries
+## Executing Queries
 To execute an update or a query, use: ->
 ```
 SQLiteDatabase.statement.executeQuery(String query)
