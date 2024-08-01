@@ -10,7 +10,7 @@ Add the following code to your pom.xml
 <dependency>
     <groupId>com.afutik</groupId>
     <artifactId>sqlite-tools</artifactId>
-    <version>1.1.2</version>
+    <version>1.1.3</version>
 </dependency>
 ```
 
@@ -25,14 +25,14 @@ schema-path: src/main/resources/database/schema.sql
 You also need to create schema.sql at the specified schema-path.
 
 ## Connecting to the Database
-In order to connect to database, use the following code. The Database file will be created automatically.
+In order to connect to database, use the following code. The method connect() requires the path to sqlite jdbc class, install the package with jdbc driver and write path to this class in the method. The Database file will be created automatically.
 If you need to change config path or name, use 'SQLdatabase.setConfigPath()', by default path is 'src/main/resources/sqlite.yml'.
 ```java
 public class Main {
   public static void main(String[] args) {
     SQLiteDabase.setConfigPath("config.yml");
 
-    SQLiteDabase.connect(); /* Can take logger */
+    SQLiteDabase.connect(SQLITE JDBC CLASS); /* Can take logger */
   }
 }
 ```
