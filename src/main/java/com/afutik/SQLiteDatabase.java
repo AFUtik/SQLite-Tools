@@ -35,11 +35,11 @@ public class SQLiteDatabase {
         SCHEMA = ConfigLoader.loadString(config.getString("schema-path"));
     }
 
-    public static void connect() {
-        connect(null);
+    public static void connect(String jdbc) {
+        connect(jdbc,null);
     }
 
-    public static void connect(Logger logger) {
+    public static void connect(String jdbc,Logger logger) {
         try {
             loadConfig();
 
@@ -69,7 +69,6 @@ public class SQLiteDatabase {
                 return preparedStatement.executeQuery();
             } else {
                 preparedStatement.executeUpdate();
-                preparedStatement.close();
             }
         } catch (SQLException ex) {
             if(logger != null) {
