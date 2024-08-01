@@ -32,7 +32,7 @@ public class Main {
   public static void main(String[] args) {
     SQLiteDabase.setConfigPath("config.yml");
 
-    SQLiteDabase.connect(SQLITE JDBC CLASS); /* Can take logger */
+    SQLiteDabase.connect("The path to jdbc class"); /* Can take logger */
   }
 }
 ```
